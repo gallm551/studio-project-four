@@ -1,34 +1,27 @@
-// Source: 
 // The Nature of Code
 // Daniel Shiffman
 // http://natureofcode.com
 
-
-// var ellipseDiameter = 60;
-// var ellipseRandom;
+var ellipseDiameter = 50;
 
 let flock;
 
-
 function setup() {
-  createCanvas(windowWidth,650);
+  createCanvas(windowWidth,windowHeight);
 
   flock = new Flock();
   // Add an initial set of boids into the system
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100; i++) {
     let b = new Boid(width / 2,height / 2);
     flock.addBoid(b);
   }
 }
 
-
-// draws the stuff new every 30 secs?
 function draw() {
-  background(40,50,90); //bkg color
+  background(40,80,120); //bkg color
   flock.run();
   noStroke();
 }
-
 
 // Add a new boid into the System
 function mouseDragged() {
@@ -58,11 +51,11 @@ Flock.prototype.addBoid = function(b) {
 
 function Boid(x, y) {
   this.acceleration = createVector(0, 0);
-  this.velocity = createVector(random(-3, 3), random(-3, 3));
+  this.velocity = createVector(random(-1, 1), random(-1, 1));
   this.position = createVector(x, y);
   this.r = 1.5;
-  this.maxspeed = 2;    // Maximum speed
-  this.maxforce = 0.05; // Maximum steering force
+  this.maxspeed = 2.5;    // Maximum speed
+  this.maxforce = 0.02; // Maximum steering force
 }
 
 Boid.prototype.run = function(boids) {
@@ -100,7 +93,7 @@ Boid.prototype.update = function() {
   this.velocity.limit(this.maxspeed);
   this.position.add(this.velocity);
   // Reset accelertion to 0 each cycle
-  this.acceleration.mult(0);
+  this.acceleration.mult(1);
 }
 
 // A method that calculates and applies a steering force towards a target
@@ -119,8 +112,8 @@ Boid.prototype.seek = function(target) {
 Boid.prototype.render = function() {
   // Draw a circle in the direction of velocity
   let theta = this.velocity.heading() + radians(90);
-  fill(122, 215, 230);
-  stroke(71, 157, 171);
+  fill(122, 215, 230, 75);
+  stroke(71, 157, 171, 75);
   ellipse(this.position.x, this.position.y, 23,23);
 }
 
@@ -135,7 +128,7 @@ Boid.prototype.borders = function() {
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function(boids) {
-  let desiredseparation = 25.0;
+  let desiredseparation = 75.0;
   let steer = createVector(0, 0);
   let count = 0;
   // For every boid in the system, check if it's too close

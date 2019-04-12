@@ -3,12 +3,11 @@
 // http://natureofcode.com
 
 var ellipseDiameter = 60;
-var ellipseRandom;
 
 let flock;
 
 function setup() {
-  createCanvas(windowWidth,650);
+  createCanvas(windowWidth,windowHeight);
   background(120, 180, 255);
 
   flock = new Flock();

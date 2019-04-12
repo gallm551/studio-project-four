@@ -1,14 +1,17 @@
 // The Nature of Code
 // Daniel Shiffman
 // http://natureofcode.com
-// Code assistance taken for flocking mechanism 
 
+
+//
 var ellipseDiameter = 50;
+
 
 let flock;
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
+  
 
   flock = new Flock();
   // Add an initial set of boids into the system
@@ -19,9 +22,9 @@ function setup() {
 }
 
 function draw() {
-  background(255);
-  flock.run();
-  noStroke();
+  background(21, 48, 91);
+  flock.run();  
+
 }
 
 // Add a new boid into the System
@@ -112,10 +115,10 @@ Boid.prototype.seek = function(target) {
 
 Boid.prototype.render = function() {
   // Draw a circle in the direction of velocity
-  let theta = this.velocity.heading() + radians(90);
-  fill(122, 215, 230, 35);
-  stroke(71, 157, 171, 35);
-  ellipse(this.position.x, this.position.y, 23,23);
+  let theta = this.velocity.heading() + radians(300);
+  fill(139, 201, 232, 50);
+  stroke(100, 162, 202, 50);
+  ellipse(this.position.x, this.position.y, 60,60);
 }
 
 // Wraparound
@@ -129,7 +132,7 @@ Boid.prototype.borders = function() {
 // Separation
 // Method checks for nearby boids and steers away
 Boid.prototype.separate = function(boids) {
-  let desiredseparation = 25.0;
+  let desiredseparation = 40.0;
   let steer = createVector(0, 0);
   let count = 0;
   // For every boid in the system, check if it's too close
